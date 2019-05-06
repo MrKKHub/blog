@@ -1,7 +1,10 @@
 <template>
     <div class="nav">
         <ul ref="len">
-            <li v-for="(item,index) of lists" :key="index">{{item}}</li>
+            <li v-for="(item,index) of lists" 
+            :key="index"
+            @click="handleclass(item)"
+            :class="{ active:isActive == item}">{{item}}</li>
         </ul>
     </div>
 </template>
@@ -11,7 +14,8 @@ export default {
   name: 'HomeNav',
   data(){
       return{
-          lists:['娱乐','电影','实时热点','电竞','技术','音乐','汽车','体育']
+          lists:['娱乐','电影','实时热点','电竞','技术','音乐','汽车','体育'],
+          isActive:''
       }
   },
   mounted(){
@@ -28,6 +32,12 @@ export default {
         scrollX:true,
         click:true
     })
+  },
+  methods:{
+      handleclass(item){
+        //   console.log(item)
+          this.isActive = item
+      }
   }
       
 }
@@ -36,11 +46,14 @@ export default {
 <style lang="stylus" scoped>
 @import '~stylus/varibles.styl';
 .nav{
-    position relative
+    position fixed
     width 100%
     height 0.92rem
     background-color bgColor
     text-align center
+    margin-bottom 0.2rem
+    top 1.2rem
+    z-index 999
     ul{
         position absolute
         top 0
@@ -52,5 +65,8 @@ export default {
             padding 0 0.4rem
         }
     }
+}
+.active{
+    color blue    
 }
 </style>
